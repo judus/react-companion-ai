@@ -1,0 +1,314 @@
+:root {
+	--darkest: #04121D;
+	--gray: #999999;
+	--light-gray: #CCCCCC;
+	--lighter-gray: #DDDDDD;
+
+	--creme: #FAE8D7;
+	--white: #FFFFFF;
+
+	--cyan: #06D0E7;
+	--red: #FF7B68;
+	--pine: #224656
+}
+
+html, body {
+	height: 100%;
+}
+
+#root {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+#root > * {
+	flex-grow: 1;
+}
+
+.App {
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 a {
+	color: var(--cyan);
+	text-decoration: none;
+}
+
+h3 {
+	color: var(--cyan);
+}
+
+h4 {
+	font-size: 16px;
+}
+
+/* General App Styles */
+.App {
+	min-height: 100%;
+	font-family: 'Arial', sans-serif;
+	background-color: var(--darkest);
+	color: #04121D;
+	font-size: 14px;
+	line-height: 1.4em;
+	margin: 0;
+	padding: 0 0 40px;
+}
+
+.app-container {
+	max-width: 800px;
+	margin: auto;
+}
+
+.app-header, .app-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: 15px 20px;
+}
+.app-footer {
+	display: none;
+}
+
+.app-main {
+	background-color: var(--pine);
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+}
+
+.container-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--red);
+	border-radius: 8px;
+	padding: 15px;
+	margin: 10px 0;
+}
+
+.actions {
+	text-align: right;
+}
+
+/* Navigation and User Area */
+.content h1 a, .user-area h3 {
+	text-decoration: none;
+}
+
+button {
+	margin: 0;
+	padding: 0;
+}
+
+a[class*="btn-"],
+[class*="btn-"] {
+	line-height: 1em;
+	display: inline-block;
+	background-color: var(--cyan);
+	color: #04121D;
+	border-radius: 4px;
+	padding: 10px 20px;
+	cursor: pointer;
+	border: none;
+	margin-left: 5px;
+}
+
+[class*="btn-"]:hover {
+	background-color: var(--darkest);
+	color: var(--cyan);
+}
+
+.btn-small {
+	font-size: smaller;
+	padding: 6px 10px;
+}
+
+.btn-delete {
+	background-color: var(--red);
+}
+
+.btn-trash, .btn-submit, .btn-reload, .btn-edit, .btn-new, .btn-delete, .btn-back, .btn-save {
+
+}
+
+.btn-trash:hover, .btn-submit:hover, .btn-reload:hover, .btn-edit:hover, .btn-new:hover, .btn-delete:hover, .btn-back:hover, .btn-save:hover {
+}
+
+
+
+/* Lists */
+ul.item-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+ul.item-list li {
+	padding: 15px;
+	background-color: #E7F0FA;
+	margin-bottom: 5px;
+	border-radius: 4px;
+}
+
+/* Forms */
+.field, .form-field {
+	margin-bottom: 20px;
+}
+
+.field-label, .form-label {
+	font-weight: bold;
+}
+
+.field-value, .form-label {
+	margin-left: 5px;
+}
+
+.form-label {
+	font-weight: bold;
+	font-size: smaller;
+	color: #999999;
+	text-transform: uppercase;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.form-field input,
+.form-field textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #CCCCCC;
+	border-radius: 4px;
+	font-size: 16px;
+	box-sizing: border-box; /* This ensures padding does not affect the total width */
+}
+
+.form-field textarea {
+	resize: vertical;
+	min-height: 200px;
+}
+
+/* Pages */
+.character-list .item-list li {
+	background-color: var(--creme);
+	margin: 10px 0;
+}
+
+.character-list .item-list li:hover {
+	background-color: var(--light-gray);
+	cursor: pointer;
+}
+
+.character-details {
+	background-color: var(--creme);
+	border-radius: 8px;
+	padding: 15px;
+	margin: 10px 0;
+}
+
+.character-sessions .item-list li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.character-sessions .item-list li:hover {
+	background-color: var(--light-gray);
+	cursor: pointer;
+}
+
+/* Input Area */
+.input-area textarea {
+	width: 100%;
+	padding: 10px;
+	border-radius: 4px;
+	border: 1px solid #DDDDDD;
+	margin-bottom: 10px;
+}
+
+
+/* Messages and Chat Area */
+.messages {
+	height: calc(100vh - 330px);
+	margin: 15px 0;
+	border: 1px solid var(--red);
+	padding: 15px;
+	border-radius: 8px;
+	overflow-y: auto;
+}
+
+.messages::-webkit-scrollbar {
+	width: 0px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+	background-color: transparent;
+}
+
+.messages::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+.message {
+}
+
+.message pre {
+	white-space: pre-wrap;
+	font-size: x-small;
+}
+
+.msg-assistant .dialogue {
+	background-color: var(--creme);
+}
+
+.msg-user {
+	text-align: right;
+}
+
+.dialogue {
+	margin-bottom: 10px;
+}
+
+.dialogue {
+	background-color: var(--cyan);
+	display: inline-block;
+	padding: 0 15px;
+	border-radius: 10px;
+	margin: 10px 0;
+	line-height: 1.5em;
+	max-width: 90%;
+}
+
+.dialogue p:not(:last-child),
+.dialogue ul:not(:last-child),
+.dialogue ol:not(:last-child) {
+	margin-bottom: 2em;
+}
+
+.input-area {
+	display: flex;
+}
+
+.input-area textarea {
+	flex-grow: 1;
+	padding: 10px;
+	margin-bottom: 0;
+	border: 1px solid #CCCCCC;
+	min-height: 2.8em
+}
+
+.input-area button {
+	padding: 10px;
+	background-color: #007BFF;
+	color: white;
+	border: none;
+	cursor: pointer;
+}

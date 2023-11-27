@@ -1,0 +1,103 @@
+.app-container {
+	background-color: #224656; /* Dark desaturated blue for the app background */
+	color: #FAE8D7; /* Light beige for text */
+	font-family: Arial, sans-serif;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.panel {
+	background-color: #04121D; /* Very dark blue-green for panels */
+	border-radius: 10px;
+	padding: 15px;
+	margin-bottom: 15px;
+	display: flex;
+	align-items: center;
+}
+
+.user-profile .profile-picture {
+	background-color: #06D0E7; /* Bright cyan for the profile picture */
+	border-radius: 50%;
+	height: 60px;
+	width: 60px;
+	margin-right: 15px;
+}
+
+.user-details h3, .info-title {
+	margin: 0;
+	color: #FAE8D7; /* Light beige for titles */
+}
+
+.user-details p, .info-content {
+	margin: 0;
+	color: #FAE8D7; /* Light beige for text */
+}
+
+/* Beige Info Panel */
+.info-panel {
+	background-color: #FAE8D7; /* Light beige background for the info panel */
+	color: #04121D; /* Very dark blue-green for text */
+	flex-direction: column; /* Stack children vertically */
+}
+
+/* Chat Container */
+.container {
+	background-color: #04121D; /* Very dark blue-green for chat container */
+	border-radius: 10px;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+/* Message Input Field */
+.field {
+	display: flex;
+	margin-bottom: 15px;
+}
+
+.message-input {
+	flex: 1;
+	border: none;
+	border-radius: 20px;
+	padding: 10px;
+	margin-right: 10px;
+	background-color: #FAE8D7; /* Light beige for input background */
+	color: #04121D; /* Very dark blue-green for input text */
+}
+
+/* Button Styles */
+.btn {
+	background-color: #06D0E7; /* Bright cyan for buttons */
+	border: none;
+	border-radius: 20px;
+	color: #04121D; /* Very dark blue-green for button text */
+	padding: 10px 20px;
+	cursor: pointer;
+	outline: none; /* Remove focus border */
+}
+
+.btn:hover {
+	background-color: #FF7B68; /* Soft red for hover state */
+}
+
+/* Toolbar */
+.toolbar {
+	background-color: #224656; /* Dark desaturated blue for toolbar */
+	border-radius: 10px;
+	padding: 10px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.toolbar-btn {
+	background-color: #06D0E7; /* Bright cyan for toolbar buttons */
+	border: none;
+	border-radius: 50%;
+	padding: 10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.toolbar-btn:hover {
+	background-color: #FF7B68; /* Soft red for toolbar button hover state */
+}

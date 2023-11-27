@@ -1,0 +1,66 @@
+{
+  "context": {
+    "user": {
+      "id": 1,
+      "name": "Simon",
+      "email": "julien.duseyau@gmail.com",
+      "token": "Oel8SxJEt2fQozUoGIOiL2RY95nMWULqZpC4MPq849925d4b",
+      "gender": "male",
+      "age": 32
+    },
+    "character": {
+      "name": "Alex",
+      "gender": "female",
+      "age": 28,
+      "traits": [
+        "smart",
+        "funny",
+        "caring"
+      ]
+    }
+  },
+  "history": {
+    "context": {
+      "summary": "Simon has just entered the virtual library and met Alex.",
+      "currentCharacterMood": "curious"
+    },
+    "messages": [
+      {
+        "sender": "character",
+        "timestamp": "2023-11-19T10:00:00Z",
+        "context": {
+          "location": "virtual library",
+          "action": "introducing"
+        },
+        "text": [
+          {
+            "type": "narration",
+            "text": "Simon enters the virtual library."
+          },
+          {
+            "type": "conversation",
+            "text": "Hi, I'm Alex. Nice to meet you!"
+          }
+        ]
+      },
+      {
+        "sender": "user",
+        "timestamp": "2023-11-19T10:01:00Z",
+        "context": {
+          "emotion": "impressed",
+          "action": "responding"
+        },
+        "text": [
+          {
+            "type": "conversation",
+            "text": "Hi Alex, I'm Simon. Nice to meet you too!"
+          },
+          {
+            "type": "narration",
+            "text": "I am impressed by Alex's appearance."
+          }
+        ]
+      }
+    ]
+  }
+}
