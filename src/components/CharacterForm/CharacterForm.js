@@ -22,7 +22,6 @@ function CharacterForm() {
         location: '',
         dialogueStyle: '',
         prompt: '',
-        // You can continue adding other fields as necessary
     });
     const [isEditing, setIsEditing] = useState(characterId ? true : false);
 

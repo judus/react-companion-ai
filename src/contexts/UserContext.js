@@ -11,7 +11,7 @@ export const UserProvider = ({children}) => {
     const mockUser = {
         id: 1,
         name: "TheUser",
-        email: "julien.duseyau@gmail.com",
+        email: "the-user@example.com",
         token: process.env.REACT_APP_MOCK_USER_API_TOKEN,
     };
 
