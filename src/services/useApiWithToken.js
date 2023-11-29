@@ -4,7 +4,7 @@ import {UserContext} from '../contexts/UserContext';
 
 export const useApiWithToken = () => {
     const {user} = useContext(UserContext);
-    const api = new ApiRequest('http://localhost:8000/api');
+    const api = new ApiRequest(process.env.REACT_APP_API_BASE_URL);
 
     const withToken = (apiMethod) => {
         return (...args) => {

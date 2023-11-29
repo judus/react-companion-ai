@@ -1,7 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
-import ApiRequest from "../../services/ApiRequest";
-import {UserContext} from "../../contexts/UserContext";
 import {useApiWithToken} from "../../services/useApiWithToken";
 
 function CharacterDetail() {

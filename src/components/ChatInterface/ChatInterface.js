@@ -3,6 +3,7 @@ import Markdown from "../Marrdown/Markdown";
 import {Link, useParams} from "react-router-dom";
 import {UserContext} from "../../contexts/UserContext";
 import {useApiWithToken} from "../../services/useApiWithToken";
+import ScoreCard from "../ScoreCard/ScoreCard";
 
 const ChatInterface = () => {
     const api = useApiWithToken();
@@ -12,6 +13,7 @@ const ChatInterface = () => {
     const [messages, setMessages] = useState([]);
     const messagesEndRef = useRef(null);
     const [selectedSessionId, setSelectedSessionId] = useState(null);
+    const [scorecard, setScorecard] = useState({});
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
@@ -23,7 +25,12 @@ const ChatInterface = () => {
 
     useEffect(() => {
         api.get(`chat?sessionId=${sessionId}`)
-            .then(data => setMessages(data))
+            .then(data => {
+                setMessages(data.data.messages);
+                if(data.data.scorecard !== null) {
+                    setScorecard(data.data.scorecard);
+                }
+            })
             .catch(error => { console.log(error)} );
     }, [sessionId]);
 
@@ -44,7 +51,10 @@ const ChatInterface = () => {
 
             api.post(`chat?sessionId=${sessionId}`, newMessage)
                 .then((data) => {
-                    setMessages(prevMessages => [...prevMessages, ...data]);
+                    setMessages(prevMessages => [...prevMessages, ...data.data.response]);
+                    if(data.data.scorecard !== null) {
+                        setScorecard(data.data.scorecard);
+                    }
                 })
                 .catch(error => {
                     console.log(error)
@@ -67,7 +77,7 @@ const ChatInterface = () => {
     const handleDeleteMessage = async (messageId, index) => {
         api.delete(`messages/${messageId}`)
             .then(() => {
-                setMessages(prevMessages => prevMessages.slice(0, index));
+                setMessages(prevMessages => prevMessages.filter(msg => msg.id !== messageId));
             })
             .catch(error => {
                 console.log(error)
@@ -89,21 +99,24 @@ const ChatInterface = () => {
                 </div>
             </div>
             <div className="container-content">
+                <ScoreCard scorecard={scorecard}/>
                 <div className="messages">
-                    {Object.values(messages).map((msg, index) => {
-                        return (
-                            <div key={index} className={`message msg-${msg.role}`}>
-                                <div className={`dialogue`}>
-                                    <Markdown>{msg.content}</Markdown>
-                                </div>
-                                {msg.role === 'user' && (
-                                    <div className="actions">
-                                        <button className="btn-delete btn-small" onClick={() => handleDeleteMessage(msg.id, index)}>Delete</button>
+                    <div className="spacer">
+                        {Object.values(messages).map((msg, index) => {
+                            return (
+                                <div key={msg.id} className={`message msg-${msg.role}`}>
+                                    <div className={`dialogue`}>
+                                        <Markdown>{msg.content}</Markdown>
                                     </div>
-                                )}
-                            </div>
-                        );
-                    })}
+                                    {msg.role === 'user' && (
+                                        <div className="actions">
+                                            <button className="btn-delete btn-small" onClick={() => handleDeleteMessage(msg.id, index)}>Delete</button>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
                     <div ref={messagesEndRef}></div>
                 </div>
             </div>

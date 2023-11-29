@@ -34,9 +34,11 @@ function Characters() {
                 <ul className="item-list">
                     {characters.map((character) => (
                         <li key={character.id} onClick={() => handleClick(character.id)}>
-                            <h4>{character.name}</h4>
-                            <div className="character-description-short">
-                                {character.gender}, {character.age}, {character.location}, {character.occupation}
+                            <div className="character-short">
+                                <h4>{character.name}</h4>
+                                <div className="character-description-short">
+                                    {character.gender}
+                                </div>
                             </div>
                         </li>
                     ))}

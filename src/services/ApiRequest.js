@@ -2,7 +2,6 @@ class ApiRequest {
     constructor(baseURL, token) {
         this.baseURL = baseURL;
     }
-
     async request(url, method, data = null, additionalHeaders = {}, token) {
         const headers = {
             'Authorization': `Bearer ${token}`,
