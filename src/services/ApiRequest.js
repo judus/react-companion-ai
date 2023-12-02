@@ -2,19 +2,30 @@ class ApiRequest {
     constructor(baseURL, token) {
         this.baseURL = baseURL;
     }
-    async request(url, method, data = null, additionalHeaders = {}, token) {
+
+    async request(url, method, data = null, options = {}) {
         const headers = {
-            'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            ...additionalHeaders,
+            ...options.options,
         };
+
+        // Add Authorization header if token is provided in options
+        if(options.token) {
+            headers['Authorization'] = `Bearer ${options.token}`;
+        }
 
         const config = {
             method: method,
             headers: headers,
             body: data ? JSON.stringify(data) : null,
         };
+
+
+        // Include credentials if specified in options
+        if(options.includeCredentials) {
+            config.credentials = 'include';
+        }
 
         try {
             const response = await fetch(`${this.baseURL}/${url}`, config);
@@ -30,26 +41,27 @@ class ApiRequest {
             console.error('API request error:', error);
             throw error;
         }
+
     }
 
-    get(url, additionalHeaders = {}, token) {
-        return this.request(url, 'GET', null, {}, token);
+    get(url, options = {}) {
+        return this.request(url, 'GET', null, options);
     }
 
-    post(url, data, additionalHeaders = {}, token) {
-        return this.request(url, 'POST', data, additionalHeaders, token);
+    post(url, data, options = {}) {
+        return this.request(url, 'POST', data, options);
     }
 
-    put(url, data, additionalHeaders = {}, token) {
-        return this.request(url, 'PUT', data, additionalHeaders, token);
+    put(url, data, options = {}) {
+        return this.request(url, 'PUT', data, options);
     }
 
-    patch(url, data, additionalHeaders = {}, token) {
-        return this.request(url, 'PATCH', data, additionalHeaders, token);
+    patch(url, data, options = {}) {
+        return this.request(url, 'PATCH', data, options);
     }
 
-    delete(url, additionalHeaders = {}, token) {
-        return this.request(url, 'DELETE', null, additionalHeaders, token);
+    delete(url, options = {}) {
+        return this.request(url, 'DELETE', null, options);
     }
 }
 

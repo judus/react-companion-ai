@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import ApiRequest from '../../services/ApiRequest';
-import {UserContext} from '../../contexts/UserContext';
-import {useApiWithToken} from "../../services/useApiWithToken";
+import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
+import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
 
 function Characters() {
-    const api = useApiWithToken();
+    const api = useApiWithHttpOnlyCookie();
     const navigate = useNavigate();
     const [characters, setCharacters] = useState([]);
     const [error, setError] = useState('');
+
 
     useEffect(() => {
         api.get('characters')

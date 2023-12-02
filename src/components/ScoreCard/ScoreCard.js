@@ -17,11 +17,22 @@ const emotionToEmoji = {
 const ScoreCard = ({scorecard}) => {
     const [previousScores, setPreviousScores] = useState(scorecard);
     const [animateChange, setAnimateChange] = useState({});
+    const animationDuration = 3000; // Duration of the animation in milliseconds
 
     useEffect(() => {
         const newAnimateChange = {};
         Object.keys(scorecard).forEach(key => {
-            newAnimateChange[key] = scorecard[key] !== previousScores[key];
+            const hasChanged = scorecard[key] !== previousScores[key];
+            newAnimateChange[key] = hasChanged;
+
+            // Debugging: Log if there's a change
+            if(hasChanged) {
+                console.log(`Animation triggered for ${key}: ${previousScores[key]} -> ${scorecard[key]}`);
+            }
+
+            setTimeout(() => {
+                setAnimateChange(prev => ({...prev, [key]: false}));
+            }, animationDuration);
         });
         setAnimateChange(newAnimateChange);
         setPreviousScores(scorecard);

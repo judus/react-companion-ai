@@ -2,11 +2,16 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import Markdown from "../Marrdown/Markdown";
 import {Link, useParams} from "react-router-dom";
 import {UserContext} from "../../contexts/UserContext";
-import {useApiWithToken} from "../../services/useApiWithToken";
+import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
 import ScoreCard from "../ScoreCard/ScoreCard";
+import Echo from "laravel-echo";
+import Pusher from "pusher-js";
+import axios from "axios";
+import {useLaravelEcho} from "../../services/useLaravelEcho";
+
 
 const ChatInterface = () => {
-    const api = useApiWithToken();
+    const api = useApiWithHttpOnlyCookie();
     const {user} = useContext(UserContext);
     const {sessionId} = useParams();
     const [message, setMessage] = useState('');
@@ -14,6 +19,9 @@ const ChatInterface = () => {
     const messagesEndRef = useRef(null);
     const [selectedSessionId, setSelectedSessionId] = useState(null);
     const [scorecard, setScorecard] = useState({});
+    const echo = useLaravelEcho(user);
+    const [character, setCharacter] = useState(null);
+
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
@@ -24,9 +32,10 @@ const ChatInterface = () => {
     }, [messages]);
 
     useEffect(() => {
-        api.get(`chat?sessionId=${sessionId}`)
+        api.get(`chat/${sessionId}`)
             .then(data => {
                 setMessages(data.data.messages);
+                setCharacter(data.data.character);
                 if(data.data.scorecard !== null) {
                     setScorecard(data.data.scorecard);
                 }
@@ -34,27 +43,36 @@ const ChatInterface = () => {
             .catch(error => { console.log(error)} );
     }, [sessionId]);
 
+    useEffect(() => {
+        if(!echo) return;
+
+        const channel = `session.${user.id}.${sessionId}`;
+
+        echo.private(channel)
+            .listen('.NewMessageReceived', (e) => {
+                setMessages(prevMessages => [...prevMessages, ...e.data.response]);
+                e.scorecard && setScorecard(e.scorecard);
+            });
+
+        // Cleanup on component unmount
+        return () => echo.leave(channel);
+
+
+    }, [user.id, sessionId, echo]);
+
     const handleInputChange = (event) => {
         setMessage(event.target.value);
     };
 
     const handleSendClick = async () => {
         if(message.trim()) {
-            const newMessage = {
-                role: "user",
-                content: message,
-            };
+            const newMessage = { role: "user", content: message };
 
-            // Update UI immediately with the new message
-            setMessages(prevMessages => [...prevMessages, newMessage]);
             setMessage('');
 
-            api.post(`chat?sessionId=${sessionId}`, newMessage)
+            api.post(`chat/${sessionId}`, newMessage)
                 .then((data) => {
                     setMessages(prevMessages => [...prevMessages, ...data.data.response]);
-                    if(data.data.scorecard !== null) {
-                        setScorecard(data.data.scorecard);
-                    }
                 })
                 .catch(error => {
                     console.log(error)
@@ -77,7 +95,7 @@ const ChatInterface = () => {
     const handleDeleteMessage = async (messageId, index) => {
         api.delete(`messages/${messageId}`)
             .then(() => {
-                setMessages(prevMessages => prevMessages.filter(msg => msg.id !== messageId));
+                setMessages(prevMessages => prevMessages.slice(0, index));
             })
             .catch(error => {
                 console.log(error)
@@ -92,7 +110,7 @@ const ChatInterface = () => {
         <div className="container">
             <div className="container-header">
                 <div className="content">
-                    <h2>Session {sessionId}</h2>
+                    <h2>{character && character.name} #{sessionId}</h2>
                 </div>
                 <div className="actions">
                     <Link to="/" className="btn-back">Back</Link>

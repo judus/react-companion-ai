@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
-import {useApiWithToken} from "../../services/useApiWithToken";
+import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
+import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
 
 function CharacterDetail() {
-    const api = useApiWithToken();
+    const api = useApiWithHttpOnlyCookie();
     const [character, setCharacter] = useState(null);
     const [sessions, setSessions] = useState([]);
     const [error, setError] = useState('');
@@ -21,7 +22,7 @@ function CharacterDetail() {
     }
 
     if(!character) {
-        return <div>Loading...</div>;
+        return <div><RedirectToLogin/>Loading...</div>;
     }
 
     const handleEditClick = () => {
@@ -33,8 +34,8 @@ function CharacterDetail() {
     }
 
     const handleNewSession = async () => {
-        api.post(`sessions?character_id=${characterId}`)
-            .then((data => navigate(`/sessions/${data.id}`)))
+        api.post(`sessions/${characterId}`)
+            .then((data => navigate(`/sessions/${data.data.session.id}`)))
             .catch((error) => {setError(error)});
     }
 

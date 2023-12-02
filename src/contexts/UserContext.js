@@ -1,24 +1,20 @@
-import React, {createContext, useState, useContext} from 'react';
+import React, {createContext, useState} from "react";
 
-// Create a context for the user
-export const UserContext = createContext({user: null});
-// Hook to use the user context
-export const useUser = () => useContext(UserContext);
+export const UserContext = createContext({
+    user: null,
+    setUser: () => {
+    },
+    isLoading: true, // Indicates if user data is still being fetched
+    setIsLoading: () => {
+    } // Function to update the loading state
+});
 
-// Provider component that wraps your app and provides the user object
 export const UserProvider = ({children}) => {
-
-    const mockUser = {
-        id: 1,
-        name: "TheUser",
-        email: "the-user@example.com",
-        token: process.env.REACT_APP_MOCK_USER_API_TOKEN,
-    };
-
-    const [user, setUser] = useState(mockUser);
+    const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true); // Start with loading true
 
     return (
-        <UserContext.Provider value={{user, setUser}}>
+        <UserContext.Provider value={{user, setUser, isLoading, setIsLoading}}>
             {children}
         </UserContext.Provider>
     );

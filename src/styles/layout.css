@@ -378,10 +378,16 @@ ul.item-list li {
 }
 
 @keyframes number-change {
-	0%, 100% { color: black; }
-	20%, 80% { color: orange; }
+	0%, 100% { color: black; transform: scale(1); }
+	50% { color: orange; transform: scale(1.2); }
 }
 
 .animate-change {
-	animation: number-change 3s ease;
+	animation: number-change 2s ease;
+}
+
+/* Generic */
+
+.center {
+	text-align: center;
 }

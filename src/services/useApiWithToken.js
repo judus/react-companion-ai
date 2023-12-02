@@ -12,15 +12,8 @@ export const useApiWithToken = () => {
                 console.error('User or token is not available');
                 return;
             }
-
-            // Check if the last argument is an object (assuming it's additionalHeaders)
-            // If not, add an empty object as additionalHeaders before the token
-            if(args.length === 0 || typeof args[args.length - 1] !== 'object') {
-                args.push({}); // Add empty object for additionalHeaders
-            }
-
             // Add the token as the last argument
-            args.push(user.token);
+            args.push({token: user.token});
 
             return apiMethod(...args, user.token);
         };

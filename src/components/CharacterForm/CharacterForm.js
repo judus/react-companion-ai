@@ -2,12 +2,11 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Link, useParams} from "react-router-dom";
 import ApiRequest from "../../services/ApiRequest";
 import {UserContext} from "../../contexts/UserContext";
-import {useApiWithToken} from "../../services/useApiWithToken";
+import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
 
-const api = new ApiRequest('http://localhost:8000/api');
 
 function CharacterForm() {
-    const api = useApiWithToken();
+    const api = useApiWithHttpOnlyCookie();
 
     const {characterId} = useParams();
 
@@ -18,12 +17,13 @@ function CharacterForm() {
         bio: '',
         occupation: '',
         traits: '',
+        quirks: '',
         interests: '',
         location: '',
         dialogueStyle: '',
         prompt: '',
     });
-    const [isEditing, setIsEditing] = useState(characterId ? true : false);
+    const [isEditing, setIsEditing] = useState(!!characterId);
 
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -70,10 +70,10 @@ function CharacterForm() {
                 </div>
                 <div className="actions">
                     <Link to="/" className="btn-back">Back</Link>
-                    <button type="submit" className="btn-save" onClick={handleSubmit}>Save</button>
+                    <button type="submit" onClick={handleSubmit} className="btn-save">Save</button>
                 </div>
             </div>
-            <div class="system-messages">
+            <div className="system-messages">
                 {successMessage && <div className="flash-message success">{successMessage}</div>}
                 {errorMessage && <div className="flash-message error">{errorMessage}</div>}
             </div>
@@ -111,7 +111,7 @@ function CharacterForm() {
 
                     <div className="form-field">
                         <label htmlFor="quirks" className="form-label">Quirks</label>
-                        <input type="text" name="quirks" placeholder="Traits" value={character.quirks} onChange={handleChange}/>
+                        <input type="text" name="quirks" placeholder="Quirks" value={character.quirks} onChange={handleChange}/>
                     </div>
 
                     <div className="form-field">
