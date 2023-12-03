@@ -10,6 +10,8 @@ const LoginForm = () => {
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
 
+    console.log(api);
+
     const handleChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
     };

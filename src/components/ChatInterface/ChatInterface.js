@@ -40,7 +40,10 @@ const ChatInterface = () => {
                     setScorecard(data.data.scorecard);
                 }
             })
-            .catch(error => { console.log(error)} );
+            .catch(error => {
+                console.error('An error occurred:', error.message);
+            });
+
     }, [sessionId]);
 
     useEffect(() => {
@@ -110,10 +113,13 @@ const ChatInterface = () => {
         <div className="container">
             <div className="container-header">
                 <div className="content">
+                    <div className="character-image header">
+                        <img src={character && character.image_url} alt={character && character.name}/>
+                    </div>
                     <h2>{character && character.name} #{sessionId}</h2>
                 </div>
                 <div className="actions">
-                    <Link to="/" className="btn-back">Back</Link>
+                    <Link to={character ? `/character/${character.id}` : '#'} className="btn-back">Back</Link>
                 </div>
             </div>
             <div className="container-content">
@@ -124,6 +130,13 @@ const ChatInterface = () => {
                             return (
                                 <div key={msg.id} className={`message msg-${msg.role}`}>
                                     <div className={`dialogue`}>
+                                        {
+                                            msg.role === 'assistant' && character ? (
+                                                <div className="character-image offset">
+                                                    <img src={character.image_url} alt={character.name}/>
+                                                </div>
+                                            ) : null
+                                        }
                                         <Markdown>{msg.content}</Markdown>
                                     </div>
                                     {msg.role === 'user' && (

@@ -36,9 +36,16 @@ function Characters() {
                     {characters.map((character) => (
                         <li key={character.id} onClick={() => handleClick(character.id)}>
                             <div className="character-short">
-                                <h4>{character.name}</h4>
-                                <div className="character-description-short">
-                                    {character.gender}
+                                <div className="character-card">
+                                    <div className="character-image">
+                                        <img src={character.image_url} alt={character.name}/>
+                                    </div>
+                                    <div className="character-description">
+                                        <h4>{character.name}</h4>
+                                        <div className="character-description-short">
+                                            {character.gender}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </li>

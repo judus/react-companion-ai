@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
 import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
+import TabbedContents from "../TabbedContents/TabbedContents";
+import CharacterDescription from "./CharacterDescription";
+import CharacterSessions from "./CharacterSessions";
 
 function CharacterDetail() {
     const api = useApiWithHttpOnlyCookie();
@@ -40,9 +43,12 @@ function CharacterDetail() {
     }
 
     return (
-        <div className="container">
+        <div className="container character-details">
             <div className="container-header">
                 <div className="content">
+                    <div className="character-image header">
+                        <img src={character.image_url} alt={character.name}/>
+                    </div>
                     <h2>{character.name}</h2>
                 </div>
                 <div className="actions">
@@ -52,59 +58,10 @@ function CharacterDetail() {
             </div>
             <div className="system-messages"></div>
             <div className="container-content">
-                <h3>Description</h3>
-                <div className="character-details">
-                    <div className="field">
-                        <div className="field-label">Age:</div>
-                        <div className="field-value">{character.age}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Gender:</div>
-                        <div className="field-value">{character.gender}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Bio:</div>
-                        <div className="field-value">{character.bio}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Occupation:</div>
-                        <div className="field-value">{character.occupation || 'Not specified'}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Traits:</div>
-                        <div className="field-value">{character.traits}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Quirks:</div>
-                        <div className="field-value">{character.quirks}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Interests:</div>
-                        <div className="field-value">{character.interests}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Location:</div>
-                        <div className="field-value">{character.location || 'Not specified'}</div>
-                    </div>
-                    <div className="field">
-                        <div className="field-label">Dialogue Style:</div>
-                        <div className="field-value">{character.dialogue_style}</div>
-                    </div>
-                    <div className="actions">
-                        <button className="btn-edit" onClick={handleEditClick}>Edit</button>
-                    </div>
-                </div>
-                <div className="character-sessions">
-                    <h3>Sessions</h3>
-                    <ul className="item-list">
-                        {character.chat_sessions.map(session => (
-                            <li key={session.id} onClick={() => handleSessionClick(session.id)}>
-                                <h4>Session #{session.id}</h4>
-                                <button className="btn-delete btn-small">Delete</button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <TabbedContents identifier="character" tabs={[
+                    {title: 'Description', content: <CharacterDescription character={character}/>},
+                    {title: 'Sessions', content: <CharacterSessions sessions={character.chat_sessions}/>},
+                ]}/>
             </div>
         </div>
     );

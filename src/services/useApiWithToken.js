@@ -4,26 +4,21 @@ import {UserContext} from '../contexts/UserContext';
 
 export const useApiWithToken = () => {
     const {user} = useContext(UserContext);
-    const api = new ApiRequest(process.env.REACT_APP_API_BASE_URL);
 
-    const withToken = (apiMethod) => {
-        return (...args) => {
-            if(!user || !user.token) {
-                console.error('User or token is not available');
-                return;
-            }
-            // Add the token as the last argument
-            args.push({token: user.token});
+    // Check if user or user's token is available
+    if(!user || !user.token) {
+        console.error('User or token is not available');
+        return;
+    }
 
-            return apiMethod(...args, user.token);
-        };
-    };
+    // Instantiate ApiRequest with token
+    const api = new ApiRequest(process.env.REACT_APP_API_BASE_URL).withToken(user.token);
 
     return {
-        get: withToken(api.get.bind(api)),
-        post: withToken(api.post.bind(api)),
-        put: withToken(api.put.bind(api)),
-        patch: withToken(api.patch.bind(api)),
-        delete: withToken(api.delete.bind(api))
+        get: api.get.bind(api),
+        post: api.post.bind(api),
+        put: api.put.bind(api),
+        patch: api.patch.bind(api),
+        delete: api.delete.bind(api)
     };
 };

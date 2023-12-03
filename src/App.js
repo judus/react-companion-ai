@@ -9,6 +9,7 @@ import {UserContext} from "./contexts/UserContext";
 import {GoogleLogin} from 'react-google-login';
 import LoginOrSignUp from "./components/LoginOrSignup/LoginOrSignup";
 import {ProtectedRoute} from "./ProtectedRoute";
+import LogoutButton from "./components/LoginOrSignup/LogoutButton";
 
 
 function App() {
@@ -24,7 +25,12 @@ function App() {
                             <h1><Link to="/">Companion AI</Link></h1>
                         </div>
                         <div className="user-area">
-                            {user && <h3>Welcome, {user.name}</h3>}
+                            {user && (
+                                <>
+                                    <h3>Welcome, {user.name}</h3>
+                                    <LogoutButton/>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className="app-main">
