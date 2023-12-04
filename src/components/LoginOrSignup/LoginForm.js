@@ -19,35 +19,15 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // axios.defaults.withCredentials = true;
-        //
-        // axios.post(process.env.REACT_APP_API_BASE_URL + '/login', credentials)
-        //     .then(data => {
-        //         console.log(data)
-        //         setUser(data);
-        //         navigate('/');
-        //     })
-        //     .catch(error => {
-        //         console.error('Login failed:', error);
-        //         // Handle errors, show messages to user
-        //     });
-
         api.post('login', credentials)
             .then(data => {
-                console.log(data)
                 setUser(data.user);
-
                 const token = data.token;
-
-                // Store the token in local storage or a suitable place
                 localStorage.setItem('token', token);
-
-
                 navigate('/');
             })
             .catch(error => {
                 console.error('Login failed:', error);
-                // Handle errors, show messages to user
             });
     }
 

@@ -14,6 +14,7 @@ const LogoutButton = () => {
             .then(data => {
                 setUser(null);
                 localStorage.removeItem('token');
+                localStorage.removeItem('characters');
                 navigate('/login');
             })
             .catch(error => {

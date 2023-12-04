@@ -1,17 +1,17 @@
 import React, {useContext, useState} from 'react';
 import GoogleLoginButton from './GoogleLoginButton';
-import {UserContext} from "../../contexts/UserContext"; // Assuming this is already created
+import {UserContext} from "../../contexts/UserContext";
+import {useApiWithToken} from "../../services/useApiWithToken"; // Assuming this is already created
 
 const SignupForm = () => {
+    const api = useApiWithToken();
     const {user, setUser} = useContext(UserContext);
     const [userData, setUserData] = useState({
         name: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        password_confirmation: ''
     });
-
-    // const api = useApi(); // Uncomment if using a custom API service
 
     const handleChange = (e) => {
         setUserData({...userData, [e.target.name]: e.target.value});
@@ -19,36 +19,14 @@ const SignupForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add validation for userData here (like checking password match)
 
-        // Logic to handle signup with userData
-        // Typically involves sending a request to your backend server
-        // api.post('/signup', userData).then( /* handle response */ ).catch( /* handle error */ );
+        localStorage.removeItem('characters');
 
-        // Mock signup for demonstration (replace with actual signup logic)
-        console.log('User data submitted for signup:', userData);
-
-        fetch('http://localhost:8080/api/register', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: userData.name,
-                email: userData.email,
-                password: userData.password,
-                password_confirmation: userData.confirmPassword
-            }),
-        })
-        .then(response => response.json())
+        api.post('register', userData)
         .then(data => {
             if(data.user && data.token) {
                 // Assuming the API returns an object with user data and a token
                 setUser({...data.user, token: data.token});
-
-                console.log(user);
             } else {
                 // Handle any errors or invalid responses
                 console.error('Invalid response:', data);
@@ -124,12 +102,12 @@ const SignupForm = () => {
                 />
             </div>
             <div className="form-field">
-                <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
+                <label htmlFor="password_confirmation" className="form-label">Confirm Password:</label>
                 <input
                     type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={userData.confirmPassword}
+                    id="password_confirmation"
+                    name="password_confirmation"
+                    value={userData.password_confirmation}
                     onChange={handleChange}
                     required
                 />
