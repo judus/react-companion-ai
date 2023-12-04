@@ -5,7 +5,8 @@ import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie"
 import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
 import axios from "axios";
 import {useApiWithToken} from "../../services/useApiWithToken";
-import {useCharacters} from '../../contexts/CharactersContext'; // Update the path accordingly
+import {useCharacters} from '../../contexts/CharactersContext';
+import {imageFolder} from "../../utils/utils"; // Update the path accordingly
 
 
 function Characters() {
@@ -36,7 +37,7 @@ function Characters() {
                             <div className="character-short">
                                 <div className="character-card">
                                     <div className="character-image">
-                                        <img src={character.image_url} alt={character.name}/>
+                                        <img src={imageFolder("_60x60", character.image_url)} alt={character.name}/>
                                     </div>
                                     <div className="character-description">
                                         <h4>{character.name}</h4>
