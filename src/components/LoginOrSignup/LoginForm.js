@@ -3,14 +3,13 @@ import GoogleLoginButton from './GoogleLoginButton';
 import {UserContext} from "../../contexts/UserContext";
 import {useNavigate} from "react-router-dom";
 import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
+import axios from "axios";
 
 const LoginForm = () => {
     const api = useApiWithHttpOnlyCookie()
     const [credentials, setCredentials] = useState({email: '', password: ''});
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
-
-    console.log(api);
 
     const handleChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
