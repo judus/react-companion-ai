@@ -9,6 +9,7 @@ import Pusher from "pusher-js";
 import axios from "axios";
 import {useLaravelEcho} from "../../services/useLaravelEcho";
 import {useApiWithToken} from "../../services/useApiWithToken";
+import {useCharacters} from "../../contexts/CharactersContext";
 
 
 const ChatInterface = () => {
@@ -22,6 +23,7 @@ const ChatInterface = () => {
     const [scorecard, setScorecard] = useState({});
     const echo = useLaravelEcho(user);
     const [character, setCharacter] = useState(null);
+    const {triggerSessionsReFetch} = useCharacters();
 
 
     const scrollToBottom = () => {
@@ -40,6 +42,7 @@ const ChatInterface = () => {
                 if(data.data.scorecard !== null) {
                     setScorecard(data.data.scorecard);
                 }
+                triggerSessionsReFetch(data.data.character.id)
             })
             .catch(error => {
                 console.error('An error occurred:', error.message);

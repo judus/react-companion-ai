@@ -9,7 +9,7 @@ function CharacterDescription({character}) {
     };
 
     return (
-        <div class="character-card">
+        <div className="character-card">
             <div className="character-image medium">
                 <img src={character.image_url} alt={character.name}/>
             </div>

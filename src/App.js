@@ -10,6 +10,7 @@ import {GoogleLogin} from 'react-google-login';
 import LoginOrSignUp from "./components/LoginOrSignup/LoginOrSignup";
 import {ProtectedRoute} from "./ProtectedRoute";
 import LogoutButton from "./components/LoginOrSignup/LogoutButton";
+import {CharactersProvider} from "./contexts/CharactersContext";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
     return (
         <Router>
+            <CharactersProvider>
             <div className="App">
                 <div className="app-container max-width">
                     <div className="app-header">
@@ -48,6 +50,7 @@ function App() {
                     </div>
                 </div>
             </div>
+            </CharactersProvider>
         </Router>
     );
 }

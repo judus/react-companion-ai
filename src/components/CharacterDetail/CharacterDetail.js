@@ -6,21 +6,32 @@ import TabbedContents from "../TabbedContents/TabbedContents";
 import CharacterDescription from "./CharacterDescription";
 import CharacterSessions from "./CharacterSessions";
 import {useApiWithToken} from "../../services/useApiWithToken";
+import {useCharacters} from "../../contexts/CharactersContext";
 
 
 function CharacterDetail() {
     const api = useApiWithToken();
-    const [character, setCharacter] = useState(null);
-    const [sessions, setSessions] = useState([]);
     const [error, setError] = useState('');
+    const {characters, loadChatSessionsIfNeeded} = useCharacters();
     const {characterId, setCharacterId} = useParams();
+    const [sessions, setSessions] = useState([]);
     const navigate = useNavigate();
 
+    const getCharacterById = (characters, id) => {
+        if(Array.isArray(characters)) {
+            return characters.find(character => String(character.id) === String(id));
+        } else {
+            return null; // or some default value
+        }
+    };
+
+
     useEffect(() => {
-        api.get(`characters/${characterId}`)
-            .then((data => setCharacter(data.data)))
-            .catch((error) => { console.log(error); });
-    }, [characterId]);
+        loadChatSessionsIfNeeded(characterId);
+    }, [characterId, loadChatSessionsIfNeeded]);
+
+    const character = getCharacterById(characters, characterId);
+
 
     if(error) {
         return <div>Error: {error}</div>;
@@ -43,7 +54,6 @@ function CharacterDetail() {
             .then((data => navigate(`/sessions/${data.data.session.id}`)))
             .catch((error) => {setError(error)});
     }
-
     return (
         <div className="container character-details">
             <div className="container-header">
@@ -61,8 +71,14 @@ function CharacterDetail() {
             <div className="system-messages"></div>
             <div className="container-content">
                 <TabbedContents identifier="character" tabs={[
-                    {title: 'Description', content: <CharacterDescription character={character}/>},
-                    {title: 'Sessions', content: <CharacterSessions sessions={character.chat_sessions}/>},
+                    {
+                        title: 'Description',
+                        content: <CharacterDescription character={character}/>
+                    },
+                    {
+                        title: 'Sessions',
+                        content: <CharacterSessions character={character}/>
+                    },
                 ]}/>
             </div>
         </div>

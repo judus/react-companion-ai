@@ -10,6 +10,21 @@ const TabbedContent = ({tabs, identifier}) => {
         localStorage.setItem(localStorageKey, activeTab);
     }, [activeTab, localStorageKey]);
 
+    const handleTabChange = (newTabIndex) => {
+        // Call onLeave for the currently active tab
+        if(tabs[activeTab] && tabs[activeTab].onLeave) {
+            tabs[activeTab].onLeave();
+        }
+
+        setActiveTab(newTabIndex);
+
+        // Call onSelect for the new active tab
+        if(tabs[newTabIndex] && tabs[newTabIndex].onSelect) {
+            tabs[newTabIndex].onSelect();
+        }
+    };
+
+
     return (
         <div className="tabs">
             <div className="tab-titles">
@@ -17,7 +32,7 @@ const TabbedContent = ({tabs, identifier}) => {
                     <button
                         key={index}
                         className={`tab-title ${index === activeTab ? 'active' : ''}`}
-                        onClick={() => setActiveTab(index)}
+                        onClick={() => handleTabChange(index)}
                     >
                         {tab.title}
                     </button>

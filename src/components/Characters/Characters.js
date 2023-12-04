@@ -5,19 +5,15 @@ import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie"
 import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
 import axios from "axios";
 import {useApiWithToken} from "../../services/useApiWithToken";
+import {useCharacters} from '../../contexts/CharactersContext'; // Update the path accordingly
+
 
 function Characters() {
     const api = useApiWithToken();
     const navigate = useNavigate();
-    const [characters, setCharacters] = useState([]);
+    const {characters, updateCharacters} = useCharacters();
     const [error, setError] = useState('');
 
-
-    useEffect(() => {
-        api.get('characters')
-            .then((data => setCharacters(data.data)))
-            .catch((error) => { console.log(error); });
-    }, []);
 
     const handleClick = (characterId) => {
         navigate(`/character/${characterId}`);
