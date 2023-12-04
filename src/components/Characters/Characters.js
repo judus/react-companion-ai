@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import ApiRequest from '../../services/ApiRequest';
 import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
 import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
+import axios from "axios";
 
 function Characters() {
     const api = useApiWithHttpOnlyCookie();
@@ -12,7 +13,8 @@ function Characters() {
 
 
     useEffect(() => {
-        api.get('characters')
+        axios.defaults.withCredentials = true
+        axios.get(process.env.REACT_APP_API_BASE_URL + '/characters')
             .then((data => setCharacters(data.data)))
             .catch((error) => { console.log(error); });
     }, []);
