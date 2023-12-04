@@ -19,7 +19,9 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        api.post('login', credentials)
+        axios.defaults.withCredentials = true;
+
+        axios.post(process.env.REACT_APP_API_BASE_URL + 'login', credentials)
             .then(data => {
                 console.log(data)
                 setUser(data);
@@ -29,6 +31,17 @@ const LoginForm = () => {
                 console.error('Login failed:', error);
                 // Handle errors, show messages to user
             });
+
+        // api.post('login', credentials)
+        //     .then(data => {
+        //         console.log(data)
+        //         setUser(data);
+        //         navigate('/');
+        //     })
+        //     .catch(error => {
+        //         console.error('Login failed:', error);
+        //         // Handle errors, show messages to user
+        //     });
     }
 
     return (
