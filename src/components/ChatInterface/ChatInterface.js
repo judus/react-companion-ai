@@ -8,10 +8,11 @@ import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 import axios from "axios";
 import {useLaravelEcho} from "../../services/useLaravelEcho";
+import {useApiWithToken} from "../../services/useApiWithToken";
 
 
 const ChatInterface = () => {
-    const api = useApiWithHttpOnlyCookie();
+    const api = useApiWithToken();
     const {user} = useContext(UserContext);
     const {sessionId} = useParams();
     const [message, setMessage] = useState('');

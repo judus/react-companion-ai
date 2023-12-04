@@ -2,11 +2,11 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Link, useParams} from "react-router-dom";
 import ApiRequest from "../../services/ApiRequest";
 import {UserContext} from "../../contexts/UserContext";
-import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
+import {useApiWithToken} from "../../services/useApiWithToken";
 
 
 function CharacterForm() {
-    const api = useApiWithHttpOnlyCookie();
+    const api = useApiWithToken();
 
     const {characterId} = useParams();
 

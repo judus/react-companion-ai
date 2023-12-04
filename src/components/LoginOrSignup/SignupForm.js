@@ -56,6 +56,35 @@ const SignupForm = () => {
         })
         .catch(error => console.error('Error:', error));
 
+
+        // api.post('http://localhost:8080/api/register', {
+        //     method: 'POST',
+        //     credentials: 'include',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         name: userData.name,
+        //         email: userData.email,
+        //         password: userData.password,
+        //         password_confirmation: userData.confirmPassword
+        //     }),
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if(data.user && data.token) {
+        //             // Assuming the API returns an object with user data and a token
+        //             setUser({...data.user, token: data.token});
+        //
+        //             console.log(user);
+        //         } else {
+        //             // Handle any errors or invalid responses
+        //             console.error('Invalid response:', data);
+        //         }
+        //     })
+        //     .catch(error => console.error('Error:', error));
+
         // You would also handle navigation to the main page, login page, or showing a success message
     };
 

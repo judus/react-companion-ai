@@ -5,9 +5,11 @@ import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
 import TabbedContents from "../TabbedContents/TabbedContents";
 import CharacterDescription from "./CharacterDescription";
 import CharacterSessions from "./CharacterSessions";
+import {useApiWithToken} from "../../services/useApiWithToken";
+
 
 function CharacterDetail() {
-    const api = useApiWithHttpOnlyCookie();
+    const api = useApiWithToken();
     const [character, setCharacter] = useState(null);
     const [sessions, setSessions] = useState([]);
     const [error, setError] = useState('');

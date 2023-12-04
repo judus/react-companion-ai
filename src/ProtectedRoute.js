@@ -5,6 +5,8 @@ import {UserContext} from './contexts/UserContext';
 export const ProtectedRoute = ({children}) => {
     const {user, isLoading} = useContext(UserContext);
 
+    const token = localStorage.getItem('token');
+
     if(isLoading) {
         return <div>Loading...</div>; // Or any loading indicator
     }

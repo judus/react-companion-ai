@@ -3,10 +3,11 @@ import GoogleLoginButton from './GoogleLoginButton';
 import {UserContext} from "../../contexts/UserContext";
 import {useNavigate} from "react-router-dom";
 import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
+import {useApiWithToken} from "../../services/useApiWithToken";
 import axios from "axios";
 
 const LoginForm = () => {
-    const api = useApiWithHttpOnlyCookie()
+    const api = useApiWithToken()
     const [credentials, setCredentials] = useState({email: '', password: ''});
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
@@ -18,20 +19,9 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        axios.defaults.withCredentials = true;
-
-        axios.post(process.env.REACT_APP_API_BASE_URL + '/login', credentials)
-            .then(data => {
-                console.log(data)
-                setUser(data);
-                navigate('/');
-            })
-            .catch(error => {
-                console.error('Login failed:', error);
-                // Handle errors, show messages to user
-            });
-
-        // api.post('login', credentials)
+        // axios.defaults.withCredentials = true;
+        //
+        // axios.post(process.env.REACT_APP_API_BASE_URL + '/login', credentials)
         //     .then(data => {
         //         console.log(data)
         //         setUser(data);
@@ -41,6 +31,24 @@ const LoginForm = () => {
         //         console.error('Login failed:', error);
         //         // Handle errors, show messages to user
         //     });
+
+        api.post('login', credentials)
+            .then(data => {
+                console.log(data)
+                setUser(data.user);
+
+                const token = data.token;
+
+                // Store the token in local storage or a suitable place
+                localStorage.setItem('token', token);
+
+
+                navigate('/');
+            })
+            .catch(error => {
+                console.error('Login failed:', error);
+                // Handle errors, show messages to user
+            });
     }
 
     return (

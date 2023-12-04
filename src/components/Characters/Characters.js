@@ -4,17 +4,17 @@ import ApiRequest from '../../services/ApiRequest';
 import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
 import RedirectToLogin from "../LoginOrSignup/RedirectToLogin";
 import axios from "axios";
+import {useApiWithToken} from "../../services/useApiWithToken";
 
 function Characters() {
-    const api = useApiWithHttpOnlyCookie();
+    const api = useApiWithToken();
     const navigate = useNavigate();
     const [characters, setCharacters] = useState([]);
     const [error, setError] = useState('');
 
 
     useEffect(() => {
-        axios.defaults.withCredentials = true
-        axios.get(process.env.REACT_APP_API_BASE_URL + '/characters')
+        api.get('characters')
             .then((data => setCharacters(data.data)))
             .catch((error) => { console.log(error); });
     }, []);

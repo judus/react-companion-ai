@@ -6,13 +6,10 @@ export const useApiWithToken = () => {
     const {user} = useContext(UserContext);
 
     // Check if user or user's token is available
-    if(!user || !user.token) {
-        console.error('User or token is not available');
-        return;
-    }
-
+    const token = localStorage.getItem('token');
     // Instantiate ApiRequest with token
-    const api = new ApiRequest(process.env.REACT_APP_API_BASE_URL).withToken(user.token);
+
+    const api = new ApiRequest(process.env.REACT_APP_API_BASE_URL).withToken(token);
 
     return {
         get: api.get.bind(api),
