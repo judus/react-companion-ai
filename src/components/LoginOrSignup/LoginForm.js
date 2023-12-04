@@ -21,7 +21,7 @@ const LoginForm = () => {
 
         axios.defaults.withCredentials = true;
 
-        axios.post(process.env.REACT_APP_API_BASE_URL + 'login', credentials)
+        axios.post(process.env.REACT_APP_API_BASE_URL + '/login', credentials)
             .then(data => {
                 console.log(data)
                 setUser(data);
