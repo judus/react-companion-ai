@@ -24,7 +24,7 @@ function CharacterDescription({character}) {
                     <div className="field-value">{character.age}</div>
                 </div>
                 <div className="field">
-                    <div className="field-label">Gender:</div>
+                    <div className="field-label">Short description:</div>
                     <div className="field-value">{character.gender}</div>
                 </div>
                 <div className="field">

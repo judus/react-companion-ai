@@ -7,6 +7,7 @@ import CharacterDescription from "./CharacterDescription";
 import CharacterSessions from "./CharacterSessions";
 import {useApiWithToken} from "../../services/useApiWithToken";
 import {useCharacters} from "../../contexts/CharactersContext";
+import {imageFolder} from "../../utils/utils";
 
 
 function CharacterDetail() {
@@ -55,7 +56,7 @@ function CharacterDetail() {
             <div className="container-header">
                 <div className="content">
                     <div className="character-image header">
-                        <img src={character.image_url} alt={character.name}/>
+                        <img src={imageFolder("_90x90", character.image_url)} alt={character.name}/>
                     </div>
                     <h2>{character.name}</h2>
                 </div>
