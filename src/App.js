@@ -17,6 +17,10 @@ function App() {
     const [selectedSessionId, setSelectedSessionId] = useState(null);
     const {user, setUser, setIsLoading} = useContext(UserContext);
 
+    useEffect(() => {
+        localStorage.removeItem("characters");
+    }, []);
+
     return (
         <Router>
             <CharactersProvider>
