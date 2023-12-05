@@ -20,8 +20,9 @@ function CharacterForm() {
         quirks: '',
         interests: '',
         location: '',
-        dialogueStyle: '',
+        dialogue_style: '',
         prompt: '',
+        is_public: false,
     });
     const [isEditing, setIsEditing] = useState(!!characterId);
 
@@ -33,7 +34,23 @@ function CharacterForm() {
             api.get(`characters/${characterId}`)
                 .then((data => {
                     localStorage.removeItem('characters');
-                    setCharacter(data.data);
+                    const fetchedCharacter = {
+                        ...data.data,
+                        name: data.data.name || '',
+                        age: data.data.age || '',
+                        gender: data.data.gender || '',
+                        bio: data.data.bio || '',
+                        occupation: data.data.occupation || '',
+                        traits: data.data.traits || '',
+                        quirks: data.data.quirks || '',
+                        interests: data.data.interests || '',
+                        location: data.data.location || '',
+                        dialogue_style: data.data.dialogue_style || '',
+                        prompt: data.data.prompt || '',
+                        is_public: data.data.is_public !== undefined ? data.data.is_public : false
+                    };
+
+                    setCharacter(fetchedCharacter);
                 }))
                 .catch((error) => {
                     console.log(error);
@@ -42,7 +59,13 @@ function CharacterForm() {
     }, [characterId]);
 
     const handleChange = (e) => {
-        setCharacter({...character, [e.target.name]: e.target.value});
+        const {name, type, checked, value} = e.target;
+
+        if(type === "checkbox") {
+            setCharacter({...character, [name]: checked});
+        } else {
+            setCharacter({...character, [name]: value});
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -73,7 +96,6 @@ function CharacterForm() {
                 </div>
                 <div className="actions">
                     <Link to="/" className="btn-back">Back</Link>
-                    <button type="submit" onClick={handleSubmit} className="btn-save">Save</button>
                 </div>
             </div>
             <div className="system-messages">
@@ -129,84 +151,33 @@ function CharacterForm() {
 
                     <div className="form-field">
                         <label htmlFor="dialogue_style" className="form-label">Dialogue Style</label>
-                        <input type="text" name="dialogue_style" placeholder="Dialogue Style" value={character.dialogue_style} onChange={handleChange}/>
+                        <input type="text" name="dialogue_style" placeholder="Dialogue Style"
+                               value={character.dialogue_style} onChange={handleChange}/>
                     </div>
 
-                    <div className="attributes">
-                        <div className="form-field">
-                            <label htmlFor="happiness" className="form-label">Happiness</label>
-                            <input type="number" name="happiness" placeholder="Happiness" value={character.happiness}
-                                   onChange={handleChange} min="0" max="10"/>
+                    <div className="form-field">
+                        <label htmlFor="is_public_section" className="form-label">Visibility</label>
+                        <div>
+                            <input
+                                type="checkbox"
+                                id="is_public"
+                                name="is_public"
+                                checked={character.is_public}
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="is_public" className="checkbox-label">Make character public</label>
                         </div>
-
-                        <div className="form-field">
-                            <label htmlFor="interest" className="form-label">Interest</label>
-                            <input type="number" name="interest" placeholder="Interest" value={character.interest}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="sadness" className="form-label">Sadness</label>
-                            <input type="number" name="sadness" placeholder="Sadness" value={character.sadness}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="frustration" className="form-label">Frustration</label>
-                            <input type="number" name="frustration" placeholder="Frustration" value={character.frustration}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="fear" className="form-label">Fear</label>
-                            <input type="number" name="fear" placeholder="Fear" value={character.fear}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="surprise" className="form-label">Surprise</label>
-                            <input type="number" name="surprise" placeholder="Surprise" value={character.surprise}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="trust" className="form-label">Trust</label>
-                            <input type="number" name="trust" placeholder="Trust" value={character.trust}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="romantic_attachment" className="form-label">Romantic Attachment</label>
-                            <input type="number" name="romantic_attachment" placeholder="Romantic Attachment"
-                                   value={character.romantic_attachment} onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="confidence" className="form-label">Confidence</label>
-                            <input type="number" name="confidence" placeholder="Confidence" value={character.confidence}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="loneliness" className="form-label">Loneliness</label>
-                            <input type="number" name="loneliness" placeholder="Loneliness" value={character.loneliness}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
-                        <div className="form-field">
-                            <label htmlFor="confusion" className="form-label">Confusion</label>
-                            <input type="number" name="confusion" placeholder="Confusion" value={character.confusion}
-                                   onChange={handleChange} min="0" max="10"/>
-                        </div>
-
                     </div>
-
-
                     <div className="form-field">
                         <label htmlFor="prompt" className="form-label">Prompt</label>
                         <textarea name="prompt" placeholder="Prompt" value={character.prompt} onChange={handleChange}></textarea>
                     </div>
+
+
                 </form>
+                <div className="actions">
+                <button type="submit" onClick={handleSubmit} className="btn-save">Save</button>
+                </div>
             </div>
         </div>
     );

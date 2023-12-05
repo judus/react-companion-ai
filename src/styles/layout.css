@@ -219,7 +219,19 @@ ul.item-list li {
 	min-height: 200px;
 }
 
-/* Pages */
+.form-field input[type=checkbox],
+.form-field .checkbox-label {
+	width: auto;
+	display: inline;
+	color: var(--creme);
+}
+
+.form-field input[type=checkbox] {
+	margin-right: 10px;
+}
+
+
+	/* Pages */
 .character-list .item-list {
 	display: flex;
 	flex-wrap: wrap;
