@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {imageFolder} from "../../utils/utils";
+import {UserContext} from "../../contexts/UserContext";
 
 function CharacterDescription({character}) {
     const navigate = useNavigate();
+    const {user} = useContext(UserContext);
+
 
     const handleEditClick = () => {
         navigate(`/character/${character.id}/edit`);
@@ -52,9 +55,11 @@ function CharacterDescription({character}) {
                     <div className="field-label">Dialogue Style:</div>
                     <div className="field-value">{character.dialogue_style}</div>
                 </div>
-                <div className="actions">
-                    <button className="btn-edit" onClick={handleEditClick}>Edit</button>
-                </div>
+                { character.user_id === user.id ? (
+                    <div className="actions">
+                        <button className="btn-edit" onClick={handleEditClick}>Edit</button>
+                    </div>
+                ) : null }
             </div>
         </div>
     );

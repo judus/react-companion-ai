@@ -49,11 +49,7 @@ function CharacterDetail() {
         navigate(`/sessions/${sessionId}`);
     }
 
-    const handleNewSession = async () => {
-        api.post(`sessions/${characterId}`)
-            .then((data => navigate(`/sessions/${data.data.session.id}`)))
-            .catch((error) => {setError(error)});
-    }
+
     return (
         <div className="container character-details">
             <div className="container-header">
@@ -65,7 +61,6 @@ function CharacterDetail() {
                 </div>
                 <div className="actions">
                     <Link to="/" className="btn-back">Back</Link>
-                    <button className="btn-new" onClick={handleNewSession}>New Session</button>
                 </div>
             </div>
             <div className="system-messages"></div>
