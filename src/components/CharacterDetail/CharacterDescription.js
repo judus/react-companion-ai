@@ -15,7 +15,7 @@ function CharacterDescription({character}) {
     return (
         <div className="character-card">
             <div className="character-image medium">
-                <img src={imageFolder('_240x240', character.image_url)} alt={character.name}/>
+                <img src={imageFolder('_480x480', character.image_url)} alt={character.name}/>
             </div>
             <div className="character-description">
                 <h3>{character.name}</h3>

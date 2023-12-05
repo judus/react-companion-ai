@@ -1,0 +1,46 @@
+.field, .form-field {
+	margin-bottom: var(--spacing-larger);
+}
+
+.field-label, .form-label {
+	font-weight: bold;
+}
+
+.field-value, .form-label {
+	margin-left: var(--spacing-small);
+}
+
+.form-label {
+	font-weight: bold;
+	font-size: var(--small-font-size);
+	color: var(--creme);
+	text-transform: uppercase;
+	margin-bottom: var(--spacing-small);
+	display: block;
+}
+
+.form-field input,
+.form-field textarea {
+	width: 100%;
+	padding: var(--spacing-small);
+	border: 1px solid var(--light-gray);
+	border-radius: var(--border-radius-small);
+	box-sizing: border-box;
+	font-size: var(--font-size);
+}
+
+.form-field textarea {
+	resize: vertical;
+	min-height: 200px;
+}
+
+.form-field input[type=checkbox],
+.form-field .checkbox-label {
+	width: auto;
+	display: inline;
+	color: var(--creme);
+}
+
+.form-field input[type=checkbox] {
+	margin-right: var(--spacing);
+}

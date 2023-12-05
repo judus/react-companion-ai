@@ -1,0 +1,11 @@
+/* Lists */
+ul.item-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+ul.item-list li {
+	padding: 15px;
+	background-color: var(--light-gray);
+	border-radius: 4px;
+}

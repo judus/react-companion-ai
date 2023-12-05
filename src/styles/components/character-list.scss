@@ -1,0 +1,29 @@
+.character-list {
+	.item-list {
+		display: flex;
+		flex-wrap: wrap;
+		margin: calc(var(--spacing-large) * -0.5);
+		width: auto;
+
+		li {
+			width: 33.333%;
+			padding: calc(var(--spacing-large) * 0.5);
+			background-color: transparent;
+
+
+			:hover {
+				background-color: var(--light-gray);
+				cursor: pointer;
+			}
+		}
+
+		.character-short {
+			background-color: var(--creme);
+			border-radius: var(--border-radius);
+			padding: var(--spacing-large);
+			height: 100%;
+
+		}
+	}
+}
+

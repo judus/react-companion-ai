@@ -1,0 +1,40 @@
+.scorecard {
+	padding: var(--spacing) var(--spacing-larger);
+	display: flex;
+	justify-content: space-between;
+	color: var(--creme);
+
+	.label {
+		font-size: var(--font-size);
+		line-height: 1em;
+		padding-bottom: var(--spacing);
+	}
+
+	.emotion {
+		font-weight: bold;
+		font-size: 4rem;
+	}
+
+	.value {
+		margin-left: var(--spacing-small);
+		font-size: var(--font-size-large);
+	}
+
+	.animate-change {
+		animation: number-change 2s ease;
+	}
+
+}
+
+
+@keyframes number-change {
+	0%, 100% {
+		color: black;
+		transform: scale(1);
+	}
+	50% {
+		color: orange;
+		transform: scale(1.2);
+	}
+}
+

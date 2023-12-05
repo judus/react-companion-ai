@@ -16,5 +16,5 @@ export function imageFolder(folderName, imageUrl) {
     folderName = folderName.replace(/^\/+|\/+$/g, '');
 
     // Replace the base URL with the base URL + folderName + "/"
-    return imageUrl.replace(baseUrl, `${baseUrl}${folderName}/`);
+    return imageUrl.replace(baseUrl, `${baseUrl}${folderName}/`).replace('.png', '.jpg');;
 }

@@ -4,7 +4,7 @@ import ChatInterface from './components/ChatInterface/ChatInterface';
 import CharacterForm from './components/CharacterForm/CharacterForm'; // Adjust path as needed
 import Characters from "./components/Characters/Characters";
 import CharacterDetail from "./components/CharacterDetail/CharacterDetail";
-import "./styles/layout.css"
+import "./styles/layout.scss"
 import {UserContext} from "./contexts/UserContext";
 import {GoogleLogin} from 'react-google-login';
 import LoginOrSignUp from "./components/LoginOrSignup/LoginOrSignup";

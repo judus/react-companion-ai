@@ -1,0 +1,41 @@
+:root {
+	--darkest: #04121D;
+	--gray: #999999;
+	--light-gray: #CCCCCC;
+	--lighter-gray: #DDDDDD;
+
+	--creme: #FAE8D7;
+	--white: #FFFFFF;
+
+	--cyan: #06D0E7;
+	--custom-orange: #FF7B68;
+	--pine: #224656;
+
+	--font-color-light: var(--creme);
+	--font-color-dark: var(--darkest);
+
+	--font-size: 2rem;
+	--font-size-small: 1.2rem;
+	--font-size-large: 1.8rem;
+
+	--line-height: 1.3em;
+
+	--h2-font-size: calc(var(--font-size) * 2);
+	--h2-margin-bottom: 2em;
+
+	--h3-font-size: calc(var(--font-size) * 1.5);
+	--h3-margin-bottom: 2em;
+
+	--h4-font-size: calc(var(--font-size) * 1.2);
+	--h4-margin-bottom: 2em;
+
+	--border-radius: 8px;
+	--border-radius-small: calc(var(--border-radius) * 0.5);
+
+	--spacing: 16px;
+	--spacing-small: calc(var(--spacing) * 0.5);
+	--spacing-large: calc(var(--spacing) * 1.5);
+	--spacing-larger: calc(var(--spacing) * 2);
+
+	--page-max-width: 144rem;
+}

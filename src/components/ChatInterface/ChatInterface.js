@@ -119,7 +119,7 @@ const ChatInterface = () => {
             <div className="container-header">
                 <div className="content">
                     <div className="character-image header">
-                        <img src={character && imageFolder("_90x90", character.image_url)} alt={character && character.name}/>
+                        <img src={character && imageFolder("_120x120", character.image_url)} alt={character && character.name}/>
                     </div>
                     <h2>{character && character.name} #{sessionId}</h2>
                 </div>
@@ -138,7 +138,7 @@ const ChatInterface = () => {
                                         {
                                             msg.role === 'assistant' && character ? (
                                                 <div className="character-image offset">
-                                                    <img src={imageFolder("_60x60", character.image_url)} alt={character.name}/>
+                                                    <img src={imageFolder("_120x120", character.image_url)} alt={character.name}/>
                                                 </div>
                                             ) : null
                                         }

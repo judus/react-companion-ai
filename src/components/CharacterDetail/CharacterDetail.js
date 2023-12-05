@@ -56,7 +56,7 @@ function CharacterDetail() {
             <div className="container-header">
                 <div className="content">
                     <div className="character-image header">
-                        <img src={imageFolder("_90x90", character.image_url)} alt={character.name}/>
+                        <img src={imageFolder("_120x120", character.image_url)} alt={character.name}/>
                     </div>
                     <h2>{character.name}</h2>
                 </div>

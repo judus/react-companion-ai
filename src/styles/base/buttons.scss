@@ -1,0 +1,76 @@
+button {
+	margin: 0;
+	padding: 0;
+}
+
+a[class*="btn-"],
+[class*="btn-"] {
+	line-height: 1em;
+	display: inline-block;
+	background-color: var(--cyan);
+	color: var(--darkest);
+	border-radius: var(--border-radius-small);
+	padding: var(--spacing) var(--spacing-larger);
+	cursor: pointer;
+	border: none;
+	margin-left: var(--spacing-small);
+	font-size: var(--font-size);
+
+}
+
+[class*="btn-"]:hover {
+	background-color: var(--darkest);
+	color: var(--cyan);
+}
+
+.btn-small {
+	font-size: var(--small-font-size);
+	padding: 0.6rem 1rem;
+}
+
+.btn-delete, .btn-warning {
+	background-color: var(--custom-orange);
+}
+
+.btn-delete:hover, .btn-warning:hover {
+	background-color: var(--custom-orange);
+	color: #04121D;
+	opacity: 0.6;
+}
+
+.btn-trash, .btn-submit, .btn-reload, .btn-edit, .btn-new, .btn-delete, .btn-back, .btn-save {
+
+}
+
+.btn-trash:hover, .btn-submit:hover, .btn-reload:hover, .btn-edit:hover, .btn-new:hover, .btn-delete:hover, .btn-back:hover, .btn-save:hover {
+}
+
+.badge-small {
+	margin-top: 1em;
+	font-size: var(--small-font-size);
+	border: 1px solid var(--pine);
+	border-radius: 4px;
+	line-height: 1em;
+	padding: 3px;
+	color: var(--pine);
+}
+
+#google-btn {
+	background-color: #FFFFFF;
+	color: #757575;
+	border: 2px solid #F5F5F5;
+	border-radius: 5px;
+	padding: 10px 15px;
+	font-size: 16px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#google-btn img {
+	margin-right: 10px;
+	height: 20px;
+	width: 20px;
+}
+

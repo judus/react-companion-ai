@@ -1,0 +1,33 @@
+.tabs {
+	margin: 20px 0 0;
+	padding: 0;
+}
+
+.tab-titles {
+	display: flex;
+	margin-bottom: -1em;
+}
+
+.tab-title {
+	border: none;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+	background-color: var(--creme);
+	opacity: 0.6;
+	border-radius: 8px;
+	padding: var(--spacing) var(--spacing-large) var(--spacing-larger);
+	font-size: var(--font-size);
+}
+
+.tab-title.active {
+	opacity: 1;
+}
+
+.tab-content {
+	background-color: var(--creme);
+	border-radius: var(--border-radius);
+	padding: var(--spacing-large);
+	position: relative;
+	z-index: 1;
+}

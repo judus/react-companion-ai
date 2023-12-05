@@ -1,0 +1,35 @@
+.character-card {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-large);
+	height: 100%;
+
+	> * {
+		flex-grow: 1;
+	}
+
+	.character-description {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+
+		h4 {
+			color: var(--darkest);
+			font-size: var(--h4-font-size);
+			margin-bottom: 0.5em;
+		}
+	}
+
+
+	.character-visibility {
+		margin-top: auto;
+		align-self: flex-end;
+	}
+
+
+	.tab-content & {
+		margin: var(--spacing-larger) 0 0;
+		gap: calc(var(--spacing-large) * 2);
+	}
+
+}

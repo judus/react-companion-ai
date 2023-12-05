@@ -1,0 +1,11 @@
+.character-form .attributes {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 calc(var(--spacing-large) * -0.5);
+	width: auto;
+}
+
+.character-form .attributes > * {
+	width: 25%;
+	padding: calc(var(--spacing-large) * 0.5);
+}
