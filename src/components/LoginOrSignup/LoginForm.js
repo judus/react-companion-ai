@@ -5,12 +5,14 @@ import {useNavigate} from "react-router-dom";
 import {useApiWithHttpOnlyCookie} from "../../services/useApiWithHttpOnlyCookie";
 import {useApiWithToken} from "../../services/useApiWithToken";
 import axios from "axios";
+import {useCharacters} from "../../contexts/CharactersContext";
 
 const LoginForm = () => {
     const api = useApiWithToken()
     const [credentials, setCredentials] = useState({email: '', password: ''});
     const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
+    const {refreshCharacters} = useCharacters();
 
     const handleChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
@@ -24,6 +26,7 @@ const LoginForm = () => {
                 setUser(data.user);
                 const token = data.token;
                 localStorage.setItem('token', token);
+                refreshCharacters();
                 navigate('/');
             })
             .catch(error => {

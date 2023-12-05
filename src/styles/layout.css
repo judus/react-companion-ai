@@ -279,16 +279,38 @@ ul.item-list li {
 	display: flex;
 	align-items: center;
 	gap: 15px;
+	height: 100%;
 }
 
 .character-card > * {
 	flex-grow: 1;
 }
 
+.character-description {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 .character-description h3 {
 	color: var(--darkest);
 	font-size: 24px;
 	margin-bottom: 1em;
+}
+
+.character-visibility {
+	margin-top: auto;
+	align-self: flex-end;
+}
+
+.badge-small {
+	margin-top: 1em;
+	font-size: 12px;
+	border: 1px solid var(--pine);
+	border-radius: 4px;
+	line-height: 1em;
+	padding: 3px;
+	color: var(--pine);
 }
 
 .character-image {

@@ -44,6 +44,12 @@ function Characters() {
                                         <div className="character-description-short">
                                             {character.gender}
                                         </div>
+                                        <div className="character-visibility">
+                                            <div className="badge-small"
+                                                 title={character.is_public ? 'This character is available to everyone' : 'This character is available only to you'}>
+                                                { character.is_public ? 'Public' : 'Private'}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

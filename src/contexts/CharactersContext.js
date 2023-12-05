@@ -15,6 +15,19 @@ export const CharactersProvider = ({children}) => {
     const [characterToRefetch, setCharacterToRefetch] = useState(null);
 
 
+    const resetCharacters = () => {
+        localStorage.removeItem('characters');
+        setCharacters([]);
+    };
+
+    const refreshCharacters = () => {
+        setFetchTrigger(trigger => trigger + 1); // Increment to trigger re-fetch
+    };
+
+    useEffect(() => {
+        loadCharacters();
+    }, [fetchTrigger]);
+
     // Function to fetch characters from localStorage
     const fetchFromLocalStorage = () => {
         const localData = localStorage.getItem('characters');
@@ -36,14 +49,15 @@ export const CharactersProvider = ({children}) => {
         }
     };
 
-    useEffect(() => {
+    const loadCharacters = () => {
         const localCharacters = fetchFromLocalStorage();
         if(localCharacters) {
             setCharacters(localCharacters);
         } else {
             fetchFromAPI();
         }
-    }, []);
+    }
+
 
     const fetchChatSessions = async (characterId) => {
         setIsLoading(true);
@@ -86,7 +100,6 @@ export const CharactersProvider = ({children}) => {
     };
 
     useEffect(() => {
-        console.log('Refetching sessions for character', characterToRefetch);
         if(characterToRefetch !== null) {
             fetchChatSessions(characterToRefetch);
             setCharacterToRefetch(null); // Reset after fetching
@@ -95,7 +108,8 @@ export const CharactersProvider = ({children}) => {
 
 
     return (
-        <CharactersContext.Provider value={{characters, isLoading, error, loadChatSessionsIfNeeded,
+        <CharactersContext.Provider value={{characters, setCharacters, refreshCharacters,
+            resetCharacters, isLoading, error, loadChatSessionsIfNeeded,
             triggerSessionsReFetch}}>
             {children}
         </CharactersContext.Provider>
