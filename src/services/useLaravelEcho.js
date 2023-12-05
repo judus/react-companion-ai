@@ -9,7 +9,7 @@ export const useLaravelEcho = (user) => {
     const api = useApiWithToken();
 
     useEffect(() => {
-        Pusher.logToConsole = true;
+        //Pusher.logToConsole = true;
 
         window.Pusher = Pusher;
 
