@@ -31,7 +31,10 @@ function CharacterForm() {
     useEffect(() => {
         if (characterId) {
             api.get(`characters/${characterId}`)
-                .then((data => setCharacter(data.data)))
+                .then((data => {
+                    localStorage.removeItem('characters');
+                    setCharacter(data.data);
+                }))
                 .catch((error) => {
                     console.log(error);
                 });
