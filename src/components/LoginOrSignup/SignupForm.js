@@ -1,11 +1,13 @@
 import React, {useContext, useState} from 'react';
 import GoogleLoginButton from './GoogleLoginButton';
 import {UserContext} from "../../contexts/UserContext";
-import {useApiWithToken} from "../../services/useApiWithToken"; // Assuming this is already created
+import {useApiWithToken} from "../../services/useApiWithToken";
+import {useNavigate} from "react-router-dom"; // Assuming this is already created
 
 const SignupForm = () => {
     const api = useApiWithToken();
     const {user, setUser} = useContext(UserContext);
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         name: '',
         email: '',
@@ -27,6 +29,7 @@ const SignupForm = () => {
             if(data.user && data.token) {
                 // Assuming the API returns an object with user data and a token
                 setUser({...data.user, token: data.token});
+                navigate('/');
             } else {
                 // Handle any errors or invalid responses
                 console.error('Invalid response:', data);
