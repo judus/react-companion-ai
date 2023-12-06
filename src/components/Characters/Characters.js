@@ -37,7 +37,7 @@ function Characters() {
                             <div className="character-short">
                                 <div className="character-card">
                                     <div className="character-image">
-                                        <img src={imageFolder("_120x120", character.image_url)} alt={character.name}/>
+                                        <img src={character.image_url ? imageFolder("_120x120", character.image_url) : '/logo-circle-dark.svg'} alt={character.name}/>
                                     </div>
                                     <div className="character-description">
                                         <h4>{character.name}</h4>
