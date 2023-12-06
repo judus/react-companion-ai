@@ -28,7 +28,14 @@ function App() {
                 <div className="app-container max-width">
                     <div className="app-header">
                         <div className="content">
-                            <h1><Link to="/">Companion AI</Link></h1>
+                            <h1>
+                                <Link to="/">
+                                    <div className="logo-container">
+                                        <img src="/logo-circle.svg" className="logo-circle"/>
+                                        <img src="/logo-alt.svg" className="logo-text"/>
+                                    </div>
+                                </Link>
+                            </h1>
                         </div>
                         <div className="user-area">
                             {user && (
